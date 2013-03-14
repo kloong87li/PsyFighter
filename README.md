@@ -1,11 +1,10 @@
-################################################
 
-PSY FIGHTER
-by Kenneth Li
 
-################################################
+# PSY FIGHTER
+### by Kenneth Li
 
-~~~~~Description~~~~~~~~~
+
+## Description
 
 Psy Fighter is a mix of a "point-and-shoot" and "hack-and-slash" action game.
 The player controls a hero who faces an onslaught of enemies that scroll from right to left.
@@ -16,7 +15,7 @@ stat upgrades and ability upgrades.
 For detailed control, ability, and enemy information, refer to the in-game help screen.
 
 
-~~~~~Installation~~~~~~~~
+## Installation
 
 For Windows:
 
@@ -33,7 +32,7 @@ For Android Devices:
 3) Place the folder under "/sdcard/kivy/"
 
 
-~~~~PC_Controls~~~~~~~~~~~
+## PC_Controls
 
 Because PsyFighter is designed for Android devices, by default, keyboard controls are disabled.
 
