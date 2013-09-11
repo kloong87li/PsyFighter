@@ -1,0 +1,3 @@
+title=Psy Fighter
+author=Ken L
+orientation=landscape

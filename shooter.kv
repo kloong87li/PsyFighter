@@ -1,0 +1,182 @@
+#:kivy 1.4.1
+
+#main .kv file, defines rules for the main game and hero
+
+<ScreenManager>
+    #creates references to all screens used by the screen manager
+    mainScreen: game_screen
+    gameOverScreen: game_over_screen
+    upgradeScreen: upgrade_screen
+    menuScreen: menu_screen
+    helpScreen: help_screen
+    pauseScreen: pause_screen
+    
+    #the below rules add the screens as children to the screenManager
+    MenuScreen:
+        id: menu_screen
+        pos: root.pos
+        width: root.width
+        height: root.height
+    
+    MainGameScreen:
+        id: game_screen
+        pos: root.pos
+        size: root.size
+    
+    UpgradeScreen:
+        id: upgrade_screen
+        pos: root.pos
+        size: root.size
+    
+    GameOverScreen:
+        id: game_over_screen
+        pos: root.pos
+        width: root.width
+        height: root.height
+        
+    HelpScreen:
+        id: help_screen
+        pos: root.pos
+        width: root.width
+        height: root.height
+        
+    PauseScreen:
+        id: pause_screen
+        pos: root.pos
+        size:root.size
+        
+<ShooterGame>
+    #creates references to ui elements and graphic options
+    hero: main_hero
+    enemyHandler: enemy_generator
+    healthBar: health_bar
+    manaBar: mana_bar
+    scoreLabel: score_label
+    goldLabel: gold_label
+    hitFrame_normal: "images/hitFrame_clear.gif"
+    hitFrame_bloody: "images/hitFrame.gif"
+    hitImage: self.hitFrame_normal
+    
+    canvas:
+        #used for main background
+        Rectangle:
+            pos: root.pos
+            size: root.size
+            source: "images/notebook_paper.jpg"
+        #used for bloodies hit effect
+        Rectangle:
+            pos: root.pos
+            size: root.size
+            source: root.hitImage
+                
+    EnemyHandler:
+        #sets teh enemyHandler as a child of the main game
+        size: root.size
+        id: enemy_generator
+        
+    Button:
+        #secret button for keyboard use
+        size: root.width/12, root.height/12
+        center: root.width,0
+        background_normal: "images/emptyButton.gif"
+        on_press: root.addKeyboard()
+    
+    Hero:
+        #sets hero class as a child of the game
+        id: main_hero
+        abilityHandler: ability_handler
+        size: root.width/12, root.height/4.8
+        center_x: root.width/11
+        center_y: root.height/2
+        
+        AbilityHandler:
+        #ability handler is a child of the hero
+            id: ability_handler
+            pos: root.pos
+            size: root.size
+        
+        
+    #~~~~~~UI elements~~~~~~~~~~~~#
+        ProgressBar:
+            id: health_bar
+            max: main_hero.maxHealth
+            value: main_hero.health
+            height: root.height/18
+            width: root.width/3.5
+            center_x: root.width/2.8
+            center_y: root.height - root.height/20
+            
+            Label:
+                color: (0,0,0,1)
+                text: "HP"
+                font_size: 16
+                center_y: health_bar.center_y
+                center_x: health_bar.right + self.width/2
+        
+        ProgressBar:
+            id: mana_bar
+            max: main_hero.maxMana
+            value: main_hero.mana
+            size: health_bar.size
+            center_x: health_bar.center_x
+            center_y: health_bar.center_y - root.height/17
+                
+            Label:
+                text: "Psy"
+                font_size: 16
+                color: (0,0,0,1)
+                center_y: mana_bar.center_y
+                center_x: mana_bar.right + self.width/2
+        
+        Label:
+            id: score_label
+            color: (0,0,0,1)
+            text: str(main_hero.score)
+            font_size: 16
+            center_x: root.width/6.5
+            center_y: health_bar.center_y
+            
+            Label:
+                text: "Score:"
+                font_size: 16
+                color: (0,0,0,1)
+                center_x: root.width/12
+                center_y: score_label.center_y
+            
+            
+        Label:
+            id: gold_label
+            color: (0,0,0,1)
+            text: str(main_hero.gold)
+            font_size: 16
+            center_y: mana_bar.center_y
+            center_x: score_label.center_x
+            
+            Label:
+                text: "Gold:"
+                font_size: 16
+                color: (0,0,0,1)
+                center_x: root.width/12
+                center_y: gold_label.center_y
+
+        
+<Hero>
+    #sets refeences for hero stats and graphic options
+    score: 0
+    gold: 0
+    maxMana: 100
+    mana: 100
+    maxHealth: 100
+    health: 100
+    image_normal: "images/hero.gif"
+    image_hit: "images/hero_hit.gif"
+    image: self.image_normal
+    
+    canvas:
+        #base canvas object for the hero
+        Ellipse:
+            source: root.image
+            pos: self.pos
+            size: self.size
+
+            
